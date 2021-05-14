@@ -31,18 +31,17 @@ FROM
 WHERE
     e.emp_no NOT IN 
     (
-		SELECT 
+	SELECT 
             e.emp_no
         FROM
             employees e
                 JOIN
             dept_manager m ON e.emp_no = m.emp_no
-	)
-    
-	AND (e.emp_no , s.from_date) IN 
+    )    
+    AND (e.emp_no , s.from_date) IN 
     (
         SELECT 
-			de.emp_no, MAX(de.from_date)
+	    de.emp_no, MAX(de.from_date)
         FROM
             dept_emp de
                 JOIN
@@ -50,7 +49,7 @@ WHERE
         WHERE
             d.dept_name IN ('Customer Service')
         GROUP BY de.emp_no
-	);  
+     );  
 
 #View: Department managers table with their full name and the name of the department they manage
 DROP VIEW IF EXISTS v_dept_manager_details;
